@@ -1,0 +1,3884 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OpenLearn - Inclusive Peer-to-Peer Digital Education Platform</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            --primary: #0A97D9;
+            --primary-dark: #0884b8;
+            --secondary: #1A4B8C;
+            --accent: #FF6B6B;
+            --accent-dark: #ff5252;
+            --light: #F8F9FA;
+            --dark: #212529;
+            --success: #28a745;
+            --warning: #ffc107;
+            --danger: #dc3545;
+            --gray-100: #f8f9fa;
+            --gray-200: #e9ecef;
+            --gray-300: #dee2e6;
+            --gray-400: #ced4da;
+            --gray-500: #adb5bd;
+            --gray-600: #6c757d;
+            --gray-700: #495057;
+            --gray-800: #343a40;
+            --gray-900: #212529;
+            
+            --border-radius: 8px;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: var(--dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: var(--shadow);
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo i {
+            margin-right: 10px;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 1.5rem;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+        }
+        
+        .nav-links a:hover, .nav-links a.active {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: var(--accent);
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            background-color: var(--accent);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .btn:hover {
+            background-color: var(--accent-dark);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .btn-primary {
+            background-color: var(--primary);
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+        
+        .btn-outline:hover {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        /* Mobile Menu */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 6rem 0;
+            text-align: center;
+            position: relative;
+            transition: background-image 1s ease-in-out;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .author-info {
+            margin-top: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 1.5rem;
+            border-radius: 10px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .author-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid white;
+        }
+        
+        .author-details {
+            text-align: left;
+        }
+        
+        .author-name {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+        
+        .author-title {
+            font-size: 1rem;
+            opacity: 0.9;
+            margin-bottom: 0.5rem;
+        }
+        
+        .author-contact {
+            font-size: 0.9rem;
+        }
+        
+        .author-contact p {
+            margin-bottom: 0.25rem;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        .hero p {
+            font-size: 1.5rem;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+        }
+        
+        /* Section Styles */
+        section {
+            padding: 5rem 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        .section-title p {
+            color: #666;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        /* Problem Statement */
+        .problem-statement {
+            background-color: white;
+        }
+        
+        .problem-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .problem-card {
+            background: var(--light);
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease;
+            text-align: center;
+        }
+        
+        .problem-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .problem-card i {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        /* Features */
+        .features {
+            background-color: var(--light);
+        }
+        
+        .feature-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .feature-card {
+            background: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .feature-card i {
+            font-size: 3rem;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+        }
+        
+        /* Technology Stack */
+        .tech-stack {
+            background: white;
+        }
+        
+        .tech-items {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+        
+        .tech-item {
+            text-align: center;
+            padding: 2rem;
+            background: var(--light);
+            border-radius: 10px;
+            transition: var(--transition);
+        }
+        
+        .tech-item:hover {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .tech-item i {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        /* Impact Metrics */
+        .impact {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+        }
+        
+        .metrics {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            text-align: center;
+        }
+        
+        .metric {
+            padding: 2rem;
+        }
+        
+        .metric i {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--accent);
+        }
+        
+        .metric h3 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Courses Section */
+        .courses {
+            background-color: white;
+        }
+        
+        .course-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .course-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease;
+        }
+        
+        .course-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .course-image {
+            height: 180px;
+            background-color: var(--light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            font-size: 3rem;
+        }
+        
+        .course-content {
+            padding: 1.5rem;
+        }
+        
+        .course-category {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .course-title {
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .course-description {
+            color: var(--gray-600);
+            margin-bottom: 1rem;
+        }
+        
+        .course-meta {
+            display: flex;
+            justify-content: space-between;
+            color: var(--gray-500);
+            font-size: 0.9rem;
+        }
+        
+        /* Dashboard */
+        .dashboard {
+            padding: 2rem 0;
+            min-height: 80vh;
+        }
+        
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .dashboard-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            text-align: center;
+        }
+        
+        .dashboard-card i {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        .dashboard-card h3 {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal.active {
+            display: flex;
+        }
+        
+        .modal-content {
+            background: white;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 500px;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .modal-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--gray-200);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .modal-title {
+            font-size: 1.5rem;
+            color: var(--primary);
+        }
+        
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--gray-500);
+        }
+        
+        .modal-body {
+            padding: 1.5rem;
+        }
+        
+        .modal-footer {
+            padding: 1rem 1.5rem;
+            border-top: 1px solid var(--gray-200);
+            display: flex;
+            justify-content: flex-end;
+            gap: 1rem;
+        }
+        
+        /* Tabs */
+        .tabs {
+            margin-bottom: 2rem;
+        }
+        
+        .tab-headers {
+            display: flex;
+            border-bottom: 1px solid var(--gray-300);
+            margin-bottom: 1.5rem;
+        }
+        
+        .tab-header {
+            padding: 1rem 1.5rem;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            transition: var(--transition);
+        }
+        
+        .tab-header.active {
+            border-bottom-color: var(--primary);
+            color: var(--primary);
+            font-weight: 600;
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        /* Forms */
+        .form-container {
+            max-width: 500px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: white;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--gray-700);
+        }
+        
+        .form-input, .form-select, .form-textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid var(--gray-300);
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+        
+        .form-input:focus, .form-select:focus, .form-textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(10, 151, 217, 0.1);
+        }
+        
+        .form-textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+        
+        /* Resource Cards */
+        .resource-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .resource-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease;
+        }
+        
+        .resource-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .resource-image {
+            height: 180px;
+            background-color: var(--light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            font-size: 3rem;
+        }
+        
+        .resource-content {
+            padding: 1.5rem;
+        }
+        
+        .resource-category {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .resource-title {
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .resource-description {
+            color: var(--gray-600);
+            margin-bottom: 1rem;
+        }
+        
+        .resource-meta {
+            display: flex;
+            justify-content: space-between;
+            color: var(--gray-500);
+            font-size: 0.9rem;
+        }
+        
+        /* AI Feedback */
+        .ai-feedback {
+            background: var(--light);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-left: 4px solid var(--primary);
+        }
+        
+        .ai-feedback-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+        .ai-feedback-header i {
+            color: var(--primary);
+            font-size: 1.5rem;
+            margin-right: 0.5rem;
+        }
+        
+        .ai-feedback-content {
+            color: var(--gray-700);
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 3rem 0 1rem;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .footer-section h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--accent);
+        }
+        
+        .footer-section p, .footer-section li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .footer-section ul {
+            list-style: none;
+        }
+        
+        .footer-section a {
+            color: #ddd;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-section a:hover {
+            color: var(--accent);
+        }
+        
+        .social-icons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .social-icons a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            transition: var(--transition);
+        }
+        
+        .social-icons a:hover {
+            background-color: var(--accent);
+            transform: translateY(-3px);
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: linear-gradient(135deg, var(--primary), var(--secondary));
+                padding: 1rem 0;
+                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+            }
+            
+            .nav-links.active {
+                display: flex;
+            }
+            
+            .nav-links li {
+                margin: 0.5rem 0;
+                text-align: center;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1.2rem;
+            }
+            
+            .author-info {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .author-details {
+                text-align: center;
+            }
+            
+            .tab-headers {
+                flex-direction: column;
+            }
+        }
+        
+        /* Toast Notifications */
+        .toast {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 1rem 1.5rem;
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-lg);
+            display: flex;
+            align-items: center;
+            z-index: 1100;
+            transform: translateX(150%);
+            transition: transform 0.3s ease;
+        }
+        
+        .toast.active {
+            transform: translateX(0);
+        }
+        
+        .toast.success {
+            border-left: 4px solid var(--success);
+        }
+        
+        .toast.error {
+            border-left: 4px solid var(--danger);
+        }
+        
+        .toast.warning {
+            border-left: 4px solid var(--warning);
+        }
+        
+        .toast i {
+            margin-right: 0.5rem;
+            font-size: 1.2rem;
+        }
+        
+        .toast.success i {
+            color: var(--success);
+        }
+        
+        .toast.error i {
+            color: var(--danger);
+        }
+        
+        .toast.warning i {
+            color: var(--warning);
+        }
+        
+        /* Progress Bar */
+        .progress-bar {
+            height: 6px;
+            background: var(--gray-200);
+            border-radius: 3px;
+            overflow: hidden;
+            margin: 1rem 0;
+        }
+        
+        .progress {
+            height: 100%;
+            background: var(--primary);
+            border-radius: 3px;
+            transition: width 0.3s ease;
+        }
+        
+        /* Badges */
+        .badge {
+            display: inline-block;
+            padding: 0.25rem 0.5rem;
+            background: var(--primary);
+            color: white;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .badge.premium {
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+        }
+        
+        .badge.success {
+            background: var(--success);
+        }
+        
+        .badge.warning {
+            background: var(--warning);
+            color: var(--dark);
+        }
+        
+        .badge.danger {
+            background: var(--danger);
+        }
+
+        /* File Upload Styles */
+        .file-upload-container {
+            margin: 2rem 0;
+        }
+        
+        .file-upload-area {
+            border: 2px dashed var(--gray-400);
+            border-radius: var(--border-radius);
+            padding: 3rem;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .file-upload-area:hover {
+            border-color: var(--primary);
+            background-color: rgba(10, 151, 217, 0.05);
+        }
+        
+        .file-upload-area.dragover {
+            border-color: var(--primary);
+            background-color: rgba(10, 151, 217, 0.1);
+        }
+        
+        .file-upload-icon {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        .file-list {
+            margin-top: 2rem;
+        }
+        
+        .file-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            margin-bottom: 1rem;
+        }
+        
+        .file-info {
+            display: flex;
+            align-items: center;
+        }
+        
+        .file-icon {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-right: 1rem;
+        }
+        
+        .file-details h4 {
+            margin-bottom: 0.25rem;
+        }
+        
+        .file-details p {
+            color: var(--gray-600);
+            font-size: 0.9rem;
+        }
+        
+        .file-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+        
+        /* Profile Page Styles */
+        .profile-header {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .profile-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid var(--primary);
+        }
+        
+        .profile-info h1 {
+            margin-bottom: 0.5rem;
+        }
+        
+        .profile-info p {
+            color: var(--gray-600);
+        }
+        
+        .profile-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .profile-stat {
+            background: white;
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            text-align: center;
+            box-shadow: var(--shadow);
+        }
+        
+        .profile-stat-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .profile-stat-label {
+            color: var(--gray-600);
+            font-size: 0.9rem;
+        }
+        
+        /* Payment Styles */
+        .payment-methods {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .payment-method {
+            flex: 1;
+            border: 2px solid var(--gray-300);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .payment-method.active {
+            border-color: var(--primary);
+            background-color: rgba(10, 151, 217, 0.05);
+        }
+        
+        .payment-method-icon {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        .payment-form {
+            background: white;
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+        }
+        
+        /* Course Page Styles */
+        .course-detail {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            margin-bottom: 2rem;
+        }
+        
+        .course-hero {
+            height: 300px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+        
+        .course-hero-content {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+            color: white;
+            padding: 2rem;
+        }
+        
+        .course-detail-content {
+            padding: 2rem;
+        }
+        
+        .course-info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .course-info-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .course-info-item i {
+            font-size: 1.5rem;
+            color: var(--primary);
+        }
+        
+        /* About Page Styles */
+        .about-hero {
+            background: linear-gradient(rgba(10, 151, 217, 0.8), rgba(26, 75, 140, 0.9)), url('https://i.ibb.co/Kjhf4bz7/openlearn1.jpg');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 6rem 0;
+            text-align: center;
+        }
+        
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .team-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            text-align: center;
+        }
+        
+        .team-avatar {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 2rem auto 1rem;
+            border: 4px solid var(--primary);
+        }
+        
+        .team-content {
+            padding: 1.5rem;
+        }
+        
+        .team-social {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        /* Contact Page Styles */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .contact-info {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .contact-item i {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-top: 0.25rem;
+        }
+        
+        .contact-form {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">
+                    <i class="fas fa-graduation-cap"></i>
+                    <span>OpenLearn</span>
+                </div>
+                <button class="mobile-menu-btn">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <ul class="nav-links">
+                    <li><a href="#" data-page="home" class="active">Home</a></li>
+                    <li><a href="#" data-section="problem">Problem</a></li>
+                    <li><a href="#" data-section="features">Features</a></li>
+                    <li><a href="#" data-section="courses">Courses</a></li>
+                    <li><a href="#" data-section="resources">Resources</a></li>
+                    <li><a href="#" data-section="tutoring">Tutoring</a></li>
+                    <li><a href="#" data-section="tech-stack">Technology</a></li>
+                    <li><a href="#" data-section="contact">Contact</a></li>
+                    <li><a href="#" id="login-btn">Login</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Toast Notifications -->
+    <div class="toast" id="toast"></div>
+
+    <!-- Main Content -->
+    <main id="app-content">
+        <!-- Home Page -->
+        <div id="home-page" class="page active">
+            <section class="hero">
+                <div class="container">
+                    <div class="hero-content">
+                        <h1>Inclusive Peer-to-Peer Digital Education Platform</h1>
+                        <p>Bridging educational gaps with technology. Empowering learners and educators worldwide.</p>
+                        <a href="#" class="btn" id="join-mission-btn">Join Our Mission</a>
+                        
+                        <div class="author-info">
+                            <img src="https://i.ibb.co/RT6rny3B/Edris-Abdella.jpg" alt="Edris Abdella Nuure" class="author-avatar">
+                            <div class="author-details">
+                                <div class="author-name">Edris Abdella Nuure</div>
+                                <div class="author-title">Project Lead and Full Stack Developer</div>
+                                <div class="author-contact">
+                                    <p><i class="fas fa-map-marker-alt"></i> Dire Dawa, Ethiopia</p>
+                                    <p><i class="fas fa-envelope"></i> edrisabdella178@gmail.com</p>
+                                    <p><i class="fas fa-phone"></i> +251905131051</p>
+                                    <p><i class="fab fa-linkedin"></i> <a href="https://www.linkedin.com/in/edris-abdella-7aa521177" target="_blank" style="color: white;">LinkedIn Profile</a></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Problem Statement -->
+            <section id="problem" class="problem-statement">
+                <div class="container">
+                    <div class="section-title">
+                        <h2>Problem Statement</h2>
+                        <p>Education inequality remains one of the most significant challenges to sustainable development worldwide</p>
+                    </div>
+                    <div class="problem-cards">
+                        <div class="problem-card">
+                            <i class="fas fa-globe-americas"></i>
+                            <h3>Limited Access</h3>
+                            <p>Over 260 million children and youth worldwide do not attend school, and many more lack access to quality education resources.</p>
+                        </div>
+                        <div class="problem-card">
+                            <i class="fas fa-laptop-code"></i>
+                            <h3>Digital Divide</h3>
+                            <p>The COVID-19 pandemic highlighted the digital divide, with nearly 50% of students in developing countries lacking internet access.</p>
+                        </div>
+                        <div class="problem-card">
+                            <i class="fas fa-hands-helping"></i>
+                            <h3>Lack of Support</h3>
+                            <p>Many students struggle academically without access to personalized support, tutoring, or mentorship opportunities.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Features -->
+            <section id="features" class="features">
+                <div class="container">
+                    <div class="section-title">
+                        <h2>Key Features</h2>
+                        <p>OpenLearn offers a comprehensive set of features designed to enhance learning experiences</p>
+                    </div>
+                    <div class="feature-cards">
+                        <div class="feature-card">
+                            <i class="fas fa-users"></i>
+                            <h3>Peer-to-Peer Tutoring</h3>
+                            <p>Connecting learners with student tutors for personalized academic support across various subjects.</p>
+                        </div>
+                        <div class="feature-card">
+                            <i class="fas fa-book-open"></i>
+                            <h3>Digital Resource Hub</h3>
+                            <p>Curated collection of free educational materials including PDFs, eBooks, videos, and tutorials.</p>
+                        </div>
+                        <div class="feature-card">
+                            <i class="fas fa-chalkboard-teacher"></i>
+                            <h3>Study Groups</h3>
+                            <p>Virtual community learning circles for collaborative studying and knowledge sharing.</p>
+                        </div>
+                        <div class="feature-card">
+                            <i class="fas fa-mobile-alt"></i>
+                            <h3>Mobile-First Design</h3>
+                            <p>Optimized for accessibility on various devices, particularly in low-bandwidth environments.</p>
+                        </div>
+                        <div class="feature-card">
+                            <i class="fas fa-universal-access"></i>
+                            <h3>Inclusive Platform</h3>
+                            <p>Ensuring accessibility for learners regardless of technical background or ability.</p>
+                        </div>
+                        <div class="feature-card">
+                            <i class="fas fa-certificate"></i>
+                            <h3>Gamification</h3>
+                            <p>Badges, certificates, and progress tracking to motivate and engage learners.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Courses Section -->
+            <section id="courses" class="courses">
+                <div class="container">
+                    <div class="section-title">
+                        <h2>Available Courses</h2>
+                        <p>Explore our wide range of courses designed to help you achieve your learning goals</p>
+                    </div>
+                    <div class="course-grid" id="courses-container">
+                        <!-- Courses will be dynamically added here -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- Resources Section -->
+            <section id="resources" class="features">
+                <div class="container">
+                    <div class="section-title">
+                        <h2>Learning Resources</h2>
+                        <p>Explore our curated collection of free educational materials</p>
+                    </div>
+                    <div class="resource-grid" id="resources-container">
+                        <!-- Resources will be dynamically added here -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- Impact Metrics -->
+            <section id="impact" class="impact">
+                <div class="container">
+                    <div class="section-title">
+                        <h2>Impact Metrics</h2>
+                        <p>Measuring our success through tangible educational outcomes</p>
+                    </div>
+                    <div class="metrics">
+                        <div class="metric">
+                            <i class="fas fa-user-graduate"></i>
+                            <h3 id="students-count">0</h3>
+                            <p>Students Impacted</p>
+                        </div>
+                        <div class="metric">
+                            <i class="fas fa-book"></i>
+                            <h3 id="resources-count">0</h3>
+                            <p>Free Learning Resources</p>
+                        </div>
+                        <div class="metric">
+                            <i class="fas fa-chalkboard"></i>
+                            <h3 id="sessions-count">0</h3>
+                            <p>Peer Tutoring Sessions</p>
+                        </div>
+                        <div class="metric">
+                            <i class="fas fa-globe"></i>
+                            <h3 id="countries-count">0</h3>
+                            <p>Countries Reached</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Tutoring Section -->
+            <section id="tutoring" class="features">
+                <div class="container">
+                    <div class="section-title">
+                        <h2>Peer Tutoring</h2>
+                        <p>Get personalized help from expert tutors in various subjects</p>
+                    </div>
+                    <div class="feature-cards">
+                        <div class="feature-card">
+                            <i class="fas fa-clock"></i>
+                            <h3>Flexible Scheduling</h3>
+                            <p>Book sessions at your convenience with tutors available 24/7.</p>
+                        </div>
+                        <div class="feature-card">
+                            <i class="fas fa-star"></i>
+                            <h3>Expert Tutors</h3>
+                            <p>Learn from qualified tutors with proven expertise in their subjects.</p>
+                        </div>
+                        <div class="feature-card">
+                            <i class="fas fa-comments"></i>
+                            <h3>Interactive Sessions</h3>
+                            <p>Engage in live, interactive sessions with screen sharing and whiteboard.</p>
+                        </div>
+                    </div>
+                    <div class="text-center" style="margin-top: 3rem;">
+                        <a href="#" class="btn btn-primary" id="find-tutor-btn">Find a Tutor</a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Technology Stack Section -->
+            <section id="tech-stack" class="tech-stack">
+                <div class="container">
+                    <div class="section-title">
+                        <h2>Technology Stack</h2>
+                        <p>The MERN stack powers our platform for a seamless user experience</p>
+                    </div>
+                    <div class="tech-items">
+                        <div class="tech-item">
+                            <i class="fab fa-react"></i>
+                            <h3>React</h3>
+                            <p>Frontend library for building user interfaces</p>
+                        </div>
+                        <div class="tech-item">
+                            <i class="fab fa-node-js"></i>
+                            <h3>Node.js</h3>
+                            <p>JavaScript runtime for server-side development</p>
+                        </div>
+                        <div class="tech-item">
+                            <i class="fas fa-database"></i>
+                            <h3>MongoDB</h3>
+                            <p>NoSQL database for flexible data storage</p>
+                        </div>
+                        <div class="tech-item">
+                            <i class="fab fa-js-square"></i>
+                            <h3>Express.js</h3>
+                            <p>Web application framework for Node.js</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- CTA Section -->
+            <section id="contact" class="cta" style="background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white; padding: 5rem 0; text-align: center;">
+                <div class="container">
+                    <h2 style="font-size: 2.5rem; margin-bottom: 1rem;">Join Our Mission</h2>
+                    <p style="font-size: 1.2rem; max-width: 700px; margin: 0 auto 2rem;">We're looking for volunteers, partners, and supporters to help us bridge educational gaps worldwide. Together, we can make quality education accessible to all.</p>
+                    <a href="#" class="btn" id="get-involved-btn">Get Involved</a>
+                </div>
+            </section>
+        </div>
+
+        <!-- Courses Page -->
+        <div id="courses-page" class="page">
+            <section class="courses">
+                <div class="container">
+                    <div class="section-title">
+                        <h2>All Courses</h2>
+                        <p>Browse our complete catalog of courses</p>
+                    </div>
+                    
+                    <div class="search-filter" style="margin-bottom: 2rem; display: grid; grid-template-columns: 1fr auto auto; gap: 1rem;">
+                        <div class="form-group">
+                            <input type="text" id="course-search" class="form-input" placeholder="Search courses...">
+                        </div>
+                        <div class="form-group">
+                            <select id="course-category" class="form-select">
+                                <option value="all">All Categories</option>
+                                <option value="programming">Programming</option>
+                                <option value="mathematics">Mathematics</option>
+                                <option value="science">Science</option>
+                                <option value="test-prep">Test Preparation</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <select id="course-level" class="form-select">
+                                <option value="all">All Levels</option>
+                                <option value="beginner">Beginner</option>
+                                <option value="intermediate">Intermediate</option>
+                                <option value="advanced">Advanced</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="course-grid" id="all-courses-container">
+                        <!-- All courses will be populated here -->
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Course Detail Page -->
+        <div id="course-detail-page" class="page">
+            <section class="dashboard">
+                <div class="container">
+                    <div class="course-detail" id="course-detail-container">
+                        <!-- Course detail will be populated here -->
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Resources Page -->
+        <div id="resources-page" class="page">
+            <section class="features">
+                <div class="container">
+                    <div class="section-title">
+                        <h2>Learning Resources</h2>
+                        <p>Download educational materials to support your learning</p>
+                    </div>
+                    
+                    <div class="search-filter" style="margin-bottom: 2rem; display: grid; grid-template-columns: 1fr auto; gap: 1rem;">
+                        <div class="form-group">
+                            <input type="text" id="resource-search" class="form-input" placeholder="Search resources...">
+                        </div>
+                        <div class="form-group">
+                            <select id="resource-category" class="form-select">
+                                <option value="all">All Categories</option>
+                                <option value="programming">Programming</option>
+                                <option value="mathematics">Mathematics</option>
+                                <option value="science">Science</option>
+                                <option value="test-prep">Test Preparation</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="resource-grid" id="all-resources-container">
+                        <!-- All resources will be populated here -->
+                    </div>
+                    
+                    <div class="text-center" style="margin-top: 3rem;">
+                        <button class="btn btn-primary" id="upload-resource-btn">Upload Resource</button>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Tutoring Page -->
+        <div id="tutoring-page" class="page">
+            <section class="dashboard">
+                <div class="container">
+                    <div class="section-title">
+                        <h2>Peer Tutoring</h2>
+                        <p>Connect with expert tutors for personalized learning</p>
+                    </div>
+                    
+                    <div class="feature-cards">
+                        <div class="feature-card">
+                            <i class="fas fa-clock"></i>
+                            <h3>Flexible Scheduling</h3>
+                            <p>Book sessions at your convenience with tutors available 24/7.</p>
+                        </div>
+                        <div class="feature-card">
+                            <i class="fas fa-star"></i>
+                            <h3>Expert Tutors</h3>
+                            <p>Learn from qualified tutors with proven expertise in their subjects.</p>
+                        </div>
+                        <div class="feature-card">
+                            <i class="fas fa-comments"></i>
+                            <h3>Interactive Sessions</h3>
+                            <p>Engage in live, interactive sessions with screen sharing and whiteboard.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="tabs" style="margin-top: 3rem;">
+                        <div class="tab-headers">
+                            <div class="tab-header active" data-tab="find-tutor">Find a Tutor</div>
+                            <div class="tab-header" data-tab="my-sessions">My Sessions</div>
+                            <div class="tab-header" data-tab="become-tutor">Become a Tutor</div>
+                        </div>
+                        
+                        <div class="tab-content active" id="find-tutor-tab">
+                            <h3>Find the Perfect Tutor</h3>
+                            <div class="form-group" style="margin-bottom: 2rem;">
+                                <input type="text" class="form-input" placeholder="Search by subject, topic, or tutor name...">
+                            </div>
+                            
+                            <div class="course-grid">
+                                <div class="course-card">
+                                    <div class="course-image">
+                                        <i class="fas fa-user-graduate"></i>
+                                    </div>
+                                    <div class="course-content">
+                                        <h3 class="course-title">Mathematics Tutor</h3>
+                                        <p class="course-description">Expert in Calculus, Algebra, and Geometry with 5+ years of teaching experience.</p>
+                                        <div class="course-meta">
+                                            <span><i class="fas fa-star"></i> 4.9</span>
+                                            <span><i class="fas fa-users"></i> 120+ students</span>
+                                        </div>
+                                        <button class="btn btn-primary" style="width: 100%; margin-top: 1rem;">Book Session</button>
+                                    </div>
+                                </div>
+                                
+                                <div class="course-card">
+                                    <div class="course-image">
+                                        <i class="fas fa-laptop-code"></i>
+                                    </div>
+                                    <div class="course-content">
+                                        <h3 class="course-title">Programming Mentor</h3>
+                                        <p class="course-description">Full-stack developer specializing in JavaScript, Python, and web development.</p>
+                                        <div class="course-meta">
+                                            <span><i class="fas fa-star"></i> 4.8</span>
+                                            <span><i class="fas fa-users"></i> 95+ students</span>
+                                        </div>
+                                        <button class="btn btn-primary" style="width: 100%; margin-top: 1rem;">Book Session</button>
+                                    </div>
+                                </div>
+                                
+                                <div class="course-card">
+                                    <div class="course-image">
+                                        <i class="fas fa-flask"></i>
+                                    </div>
+                                    <div class="course-content">
+                                        <h3 class="course-title">Science Expert</h3>
+                                        <p class="course-description">PhD in Chemistry with expertise in Organic Chemistry and Lab Techniques.</p>
+                                        <div class="course-meta">
+                                            <span><i class="fas fa-star"></i> 4.7</span>
+                                            <span><i class="fas fa-users"></i> 80+ students</span>
+                                        </div>
+                                        <button class="btn btn-primary" style="width: 100%; margin-top: 1rem;">Book Session</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="tab-content" id="my-sessions-tab">
+                            <h3>My Tutoring Sessions</h3>
+                            <div id="upcoming-sessions">
+                                <h4>Upcoming Sessions</h4>
+                                <!-- Upcoming sessions will be populated here -->
+                            </div>
+                            <div id="past-sessions" style="margin-top: 2rem;">
+                                <h4>Past Sessions</h4>
+                                <!-- Past sessions will be populated here -->
+                            </div>
+                        </div>
+                        
+                        <div class="tab-content" id="become-tutor-tab">
+                            <h3>Become a Tutor</h3>
+                            <p>Share your knowledge and earn money by becoming an OpenLearn tutor.</p>
+                            <div class="form-container">
+                                <form id="tutor-application-form">
+                                    <div class="form-group">
+                                        <label class="form-label" for="tutor-subject">Subject You Want to Teach</label>
+                                        <input type="text" id="tutor-subject" class="form-input" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label" for="tutor-experience">Teaching Experience (years)</label>
+                                        <input type="number" id="tutor-experience" class="form-input" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label" for="tutor-qualifications">Qualifications</label>
+                                        <textarea id="tutor-qualifications" class="form-textarea" required></textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label" for="tutor-availability">Availability</label>
+                                        <textarea id="tutor-availability" class="form-textarea" placeholder="e.g., Weekdays 6-9 PM, Weekends 10 AM - 4 PM" required></textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <button type="submit" class="btn btn-primary" style="width: 100%;">Submit Application</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- About Page -->
+        <div id="about-page" class="page">
+            <section class="about-hero">
+                <div class="container">
+                    <div class="hero-content">
+                        <h1>About OpenLearn</h1>
+                        <p>Our mission to bridge educational gaps through technology</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="problem-statement">
+                <div class="container">
+                    <div class="section-title">
+                        <h2>Our Story</h2>
+                    </div>
+                    <div style="max-width: 800px; margin: 0 auto;">
+                        <p style="font-size: 1.1rem; line-height: 1.8; margin-bottom: 2rem;">
+                            OpenLearn was founded in 2025 by Edris Abdella Nuure with a vision to create an inclusive digital education platform that bridges educational gaps worldwide. Inspired by the United Nations Sustainable Development Goal 4: Quality Education, our platform leverages technology to make learning accessible to everyone, regardless of their location or socioeconomic status.
+                        </p>
+                        <p style="font-size: 1.1rem; line-height: 1.8; margin-bottom: 2rem;">
+                            We believe that education is a fundamental human right and that technology can be a powerful equalizer. Our peer-to-peer model connects learners with tutors, creates collaborative learning communities, and provides free access to high-quality educational resources.
+                        </p>
+                        <p style="font-size: 1.1rem; line-height: 1.8;">
+                            Today, OpenLearn has impacted thousands of students across multiple countries, with a growing community of educators, volunteers, and partners who share our vision of making quality education accessible to all.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="features">
+                <div class="container">
+                    <div class="section-title">
+                        <h2>Our Values</h2>
+                    </div>
+                    <div class="feature-cards">
+                        <div class="feature-card">
+                            <i class="fas fa-graduation-cap"></i>
+                            <h3>Accessibility</h3>
+                            <p>We believe education should be accessible to everyone, regardless of background or location.</p>
+                        </div>
+                        <div class="feature-card">
+                            <i class="fas fa-handshake"></i>
+                            <h3>Collaboration</h3>
+                            <p>We foster peer-to-peer learning and collaborative knowledge sharing.</p>
+                        </div>
+                        <div class="feature-card">
+                            <i class="fas fa-rocket"></i>
+                            <h3>Innovation</h3>
+                            <p>We leverage cutting-edge technology to enhance learning experiences.</p>
+                        </div>
+                        <div class="feature-card">
+                            <i class="fas fa-heart"></i>
+                            <h3>Community</h3>
+                            <p>We build supportive learning communities that empower each member.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Team Page -->
+        <div id="team-page" class="page">
+            <section class="dashboard">
+                <div class="container">
+                    <div class="section-title">
+                        <h2>Our Team</h2>
+                        <p>Meet the people behind OpenLearn</p>
+                    </div>
+                    
+                    <div class="team-grid">
+                        <div class="team-card">
+                            <img src="https://i.ibb.co/RT6rny3B/Edris-Abdella.jpg" alt="Edris Abdella Nuure" class="team-avatar">
+                            <div class="team-content">
+                                <h3>Edris Abdella Nuure</h3>
+                                <p class="course-category">Project Lead & Full Stack Developer</p>
+                                <p>Edris is the founder and lead developer of OpenLearn. With a passion for education and technology, he drives the platform's vision and development.</p>
+                                <div class="team-social">
+                                    <a href="https://www.linkedin.com/in/edris-abdella-7aa521177" target="_blank"><i class="fab fa-linkedin"></i></a>
+                                    <a href="mailto:edrisabdella178@gmail.com"><i class="fas fa-envelope"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="team-card">
+                            <div class="team-avatar" style="background: var(--primary); display: flex; align-items: center; justify-content: center; color: white;">
+                                <i class="fas fa-user" style="font-size: 3rem;"></i>
+                            </div>
+                            <div class="team-content">
+                                <h3>Eng. Hykel Mohammed</h3>
+                                <p class="course-category">Python Expert & Instructor</p>
+                                <p>Hykel is an experienced software engineer and educator who develops advanced programming courses and provides expert tutoring.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="team-card">
+                            <div class="team-avatar" style="background: var(--primary); display: flex; align-items: center; justify-content: center; color: white;">
+                                <i class="fas fa-user" style="font-size: 3rem;"></i>
+                            </div>
+                            <div class="team-content">
+                                <h3>Dr. Salomon Bekela</h3>
+                                <p class="course-category">Web Development Instructor</p>
+                                <p>Dr. Bekela is a computer science professor who creates comprehensive web development curriculum and leads our tutoring program.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="team-card">
+                            <div class="team-avatar" style="background: var(--primary); display: flex; align-items: center; justify-content: center; color: white;">
+                                <i class="fas fa-user" style="font-size: 3rem;"></i>
+                            </div>
+                            <div class="team-content">
+                                <h3>Hon. Abdi Osman</h3>
+                                <p class="course-category">Mathematics Instructor</p>
+                                <p>Abdi specializes in mathematics education and develops curriculum for students at all levels, from basic arithmetic to advanced calculus.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Contact Page -->
+        <div id="contact-page" class="page">
+            <section class="dashboard">
+                <div class="container">
+                    <div class="section-title">
+                        <h2>Contact Us</h2>
+                        <p>Get in touch with the OpenLearn team</p>
+                    </div>
+                    
+                    <div class="contact-grid">
+                        <div class="contact-info">
+                            <h3>Contact Information</h3>
+                            <div class="contact-item">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <div>
+                                    <h4>Location</h4>
+                                    <p>Dire Dawa, Ethiopia</p>
+                                </div>
+                            </div>
+                            <div class="contact-item">
+                                <i class="fas fa-envelope"></i>
+                                <div>
+                                    <h4>Email</h4>
+                                    <p>edrisabdella178@gmail.com</p>
+                                </div>
+                            </div>
+                            <div class="contact-item">
+                                <i class="fas fa-phone"></i>
+                                <div>
+                                    <h4>Phone</h4>
+                                    <p>+251905131051</p>
+                                </div>
+                            </div>
+                            <div class="contact-item">
+                                <i class="fab fa-linkedin"></i>
+                                <div>
+                                    <h4>LinkedIn</h4>
+                                    <p><a href="https://www.linkedin.com/in/edris-abdella-7aa521177" target="_blank">Edris Abdella Nuure</a></p>
+                                </div>
+                            </div>
+                            <div class="contact-item">
+                                <i class="fab fa-github"></i>
+                                <div>
+                                    <h4>GitHub</h4>
+                                    <p><a href="https://github.com/Edrisabdella" target="_blank">Edrisabdella</a></p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-form">
+                            <h3>Send us a Message</h3>
+                            <form id="contact-form">
+                                <div class="form-group">
+                                    <label class="form-label" for="contact-name">Your Name</label>
+                                    <input type="text" id="contact-name" class="form-input" required>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label" for="contact-email">Your Email</label>
+                                    <input type="email" id="contact-email" class="form-input" required>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label" for="contact-subject">Subject</label>
+                                    <input type="text" id="contact-subject" class="form-input" required>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label" for="contact-message">Message</label>
+                                    <textarea id="contact-message" class="form-textarea" rows="5" required></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-primary" style="width: 100%;">Send Message</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Dashboard Page -->
+        <div id="dashboard-page" class="page">
+            <section class="dashboard">
+                <div class="container">
+                    <div class="section-title">
+                        <h2>My Dashboard</h2>
+                        <p>Welcome back to your learning journey</p>
+                    </div>
+                    
+                    <div class="dashboard-grid">
+                        <div class="dashboard-card">
+                            <i class="fas fa-book"></i>
+                            <h3 id="user-courses-count">0</h3>
+                            <p>Enrolled Courses</p>
+                        </div>
+                        <div class="dashboard-card">
+                            <i class="fas fa-chalkboard-teacher"></i>
+                            <h3 id="user-sessions-count">0</h3>
+                            <p>Tutoring Sessions</p>
+                        </div>
+                        <div class="dashboard-card">
+                            <i class="fas fa-star"></i>
+                            <h3 id="user-rating">0.0</h3>
+                            <p>Average Rating</p>
+                        </div>
+                        <div class="dashboard-card">
+                            <i class="fas fa-trophy"></i>
+                            <h3 id="user-badges">3</h3>
+                            <p>Badges Earned</p>
+                        </div>
+                    </div>
+                    
+                    <div class="tabs">
+                        <div class="tab-headers">
+                            <div class="tab-header active" data-tab="progress">Learning Progress</div>
+                            <div class="tab-header" data-tab="courses">My Courses</div>
+                            <div class="tab-header" data-tab="resources">My Resources</div>
+                            <div class="tab-header" data-tab="sessions">Tutoring Sessions</div>
+                        </div>
+                        
+                        <div class="tab-content active" id="progress-tab">
+                            <h3>Your Learning Progress</h3>
+                            <div class="ai-feedback">
+                                <div class="ai-feedback-header">
+                                    <i class="fas fa-robot"></i>
+                                    <h4>AI Learning Assistant</h4>
+                                </div>
+                                <div class="ai-feedback-content" id="ai-feedback-text">
+                                    Based on your learning patterns, we recommend focusing on JavaScript fundamentals next. You're making great progress in web development!
+                                </div>
+                            </div>
+                            
+                            <div class="progress-container" style="margin-top: 2rem;">
+                                <h4>Web Development Course</h4>
+                                <div class="progress-bar">
+                                    <div class="progress" style="width: 65%"></div>
+                                </div>
+                                <p>65% Complete</p>
+                                
+                                <h4 style="margin-top: 1.5rem;">JavaScript Fundamentals</h4>
+                                <div class="progress-bar">
+                                    <div class="progress" style="width: 40%"></div>
+                                </div>
+                                <p>40% Complete</p>
+                                
+                                <h4 style="margin-top: 1.5rem;">Data Structures & Algorithms</h4>
+                                <div class="progress-bar">
+                                    <div class="progress" style="width: 20%"></div>
+                                </div>
+                                <p>20% Complete</p>
+                            </div>
+                        </div>
+                        
+                        <div class="tab-content" id="courses-tab">
+                            <h3>My Enrolled Courses</h3>
+                            <div class="course-grid" id="user-courses-container">
+                                <!-- User courses will be populated here -->
+                            </div>
+                        </div>
+                        
+                        <div class="tab-content" id="resources-tab">
+                            <h3>My Downloaded Resources</h3>
+                            <div class="resource-grid" id="user-resources-container">
+                                <!-- User resources will be populated here -->
+                            </div>
+                        </div>
+                        
+                        <div class="tab-content" id="sessions-tab">
+                            <h3>My Tutoring Sessions</h3>
+                            <div id="upcoming-sessions">
+                                <h4>Upcoming Sessions</h4>
+                                <!-- Upcoming sessions will be populated here -->
+                            </div>
+                            <div id="past-sessions" style="margin-top: 2rem;">
+                                <h4>Past Sessions</h4>
+                                <!-- Past sessions will be populated here -->
+                            </div>
+                            <div class="text-center" style="margin-top: 2rem;">
+                                <button class="btn btn-primary" id="schedule-session-btn">Schedule New Session</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Profile Page -->
+        <div id="profile-page" class="page">
+            <section class="dashboard">
+                <div class="container">
+                    <div class="section-title">
+                        <h2>My Profile</h2>
+                        <p>Manage your account and personal information</p>
+                    </div>
+                    
+                    <div class="profile-header">
+                        <div>
+                            <img src="https://i.ibb.co/RT6rny3B/Edris-Abdella.jpg" alt="Profile Avatar" class="profile-avatar" id="profile-avatar">
+                            <input type="file" id="avatar-upload" accept="image/*" style="display: none;">
+                            <button class="btn btn-outline" id="change-avatar-btn" style="margin-top: 1rem; width: 100%;">Change Avatar</button>
+                        </div>
+                        <div class="profile-info">
+                            <h1 id="profile-name">Loading...</h1>
+                            <p id="profile-email">Loading...</p>
+                            <p id="profile-role">Loading...</p>
+                        </div>
+                    </div>
+                    
+                    <div class="profile-stats">
+                        <div class="profile-stat">
+                            <div class="profile-stat-value" id="profile-courses">0</div>
+                            <div class="profile-stat-label">Courses Enrolled</div>
+                        </div>
+                        <div class="profile-stat">
+                            <div class="profile-stat-value" id="profile-completed">0</div>
+                            <div class="profile-stat-label">Courses Completed</div>
+                        </div>
+                        <div class="profile-stat">
+                            <div class="profile-stat-value" id="profile-hours">0</div>
+                            <div class="profile-stat-label">Learning Hours</div>
+                        </div>
+                        <div class="profile-stat">
+                            <div class="profile-stat-value" id="profile-badges">0</div>
+                            <div class="profile-stat-label">Badges Earned</div>
+                        </div>
+                    </div>
+                    
+                    <div class="tabs">
+                        <div class="tab-headers">
+                            <div class="tab-header active" data-tab="edit-profile">Edit Profile</div>
+                            <div class="tab-header" data-tab="security">Security</div>
+                            <div class="tab-header" data-tab="preferences">Preferences</div>
+                        </div>
+                        
+                        <div class="tab-content active" id="edit-profile-tab">
+                            <h3>Edit Profile Information</h3>
+                            <form id="profile-form">
+                                <div class="form-group">
+                                    <label class="form-label" for="edit-name">Full Name</label>
+                                    <input type="text" id="edit-name" class="form-input" required>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label" for="edit-email">Email</label>
+                                    <input type="email" id="edit-email" class="form-input" required>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label" for="edit-bio">Bio</label>
+                                    <textarea id="edit-bio" class="form-textarea" rows="4" placeholder="Tell us about yourself..."></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label" for="edit-location">Location</label>
+                                    <input type="text" id="edit-location" class="form-input" placeholder="Your city and country">
+                                </div>
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-primary">Update Profile</button>
+                                </div>
+                            </form>
+                        </div>
+                        
+                        <div class="tab-content" id="security-tab">
+                            <h3>Security Settings</h3>
+                            <form id="security-form">
+                                <div class="form-group">
+                                    <label class="form-label" for="current-password">Current Password</label>
+                                    <input type="password" id="current-password" class="form-input">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label" for="new-password">New Password</label>
+                                    <input type="password" id="new-password" class="form-input">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label" for="confirm-password">Confirm New Password</label>
+                                    <input type="password" id="confirm-password" class="form-input">
+                                </div>
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-primary">Change Password</button>
+                                </div>
+                            </form>
+                        </div>
+                        
+                        <div class="tab-content" id="preferences-tab">
+                            <h3>Notification Preferences</h3>
+                            <div class="form-group">
+                                <label class="form-label">
+                                    <input type="checkbox" id="email-notifications" checked> Email Notifications
+                                </label>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">
+                                    <input type="checkbox" id="course-updates" checked> Course Updates
+                                </label>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">
+                                    <input type="checkbox" id="tutoring-reminders" checked> Tutoring Session Reminders
+                                </label>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">
+                                    <input type="checkbox" id="resource-alerts" checked> New Resource Alerts
+                                </label>
+                            </div>
+                            <div class="form-group">
+                                <button class="btn btn-primary" id="save-preferences">Save Preferences</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- File Upload Page -->
+        <div id="upload-page" class="page">
+            <section class="dashboard">
+                <div class="container">
+                    <div class="section-title">
+                        <h2>Upload Resources</h2>
+                        <p>Share educational materials with the community</p>
+                    </div>
+                    
+                    <div class="form-container">
+                        <form id="upload-resource-form">
+                            <div class="form-group">
+                                <label class="form-label" for="resource-title">Title</label>
+                                <input type="text" id="resource-title" class="form-input" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="resource-description">Description</label>
+                                <textarea id="resource-description" class="form-textarea" required></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="resource-category">Category</label>
+                                <select id="resource-category" class="form-select" required>
+                                    <option value="">Select Category</option>
+                                    <option value="programming">Programming</option>
+                                    <option value="mathematics">Mathematics</option>
+                                    <option value="science">Science</option>
+                                    <option value="test-prep">Test Preparation</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                            
+                            <div class="file-upload-container">
+                                <div class="file-upload-area" id="file-upload-area">
+                                    <div class="file-upload-icon">
+                                        <i class="fas fa-cloud-upload-alt"></i>
+                                    </div>
+                                    <h3>Drag & Drop Files Here</h3>
+                                    <p>or click to browse your computer</p>
+                                    <p class="text-muted">Supports PDF, DOC, PPT, and image files (max 10MB)</p>
+                                    <input type="file" id="file-input" style="display: none;" multiple>
+                                </div>
+                                
+                                <div class="file-list" id="file-list">
+                                    <!-- Uploaded files will appear here -->
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary" style="width: 100%;">Upload Resource</button>
+                            </div>
+                        </form>
+                    </div>
+                    
+                    <div class="section-title" style="margin-top: 4rem;">
+                        <h2>My Uploads</h2>
+                        <p>Resources you've shared with the community</p>
+                    </div>
+                    
+                    <div class="resource-grid" id="my-uploads-container">
+                        <!-- User's uploaded resources will appear here -->
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>OpenLearn</h3>
+                    <p>Bridging educational gaps with technology. Empowering learners and educators worldwide through our inclusive peer-to-peer digital education platform.</p>
+                    <div class="social-icons">
+                        <a href="https://github.com/Edrisabdella" target="_blank"><i class="fab fa-github"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="https://www.linkedin.com/in/edris-abdella-7aa521177" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#" data-page="home">Home</a></li>
+                        <li><a href="#" data-section="problem">Problem</a></li>
+                        <li><a href="#" data-section="features">Features</a></li>
+                        <li><a href="#" data-section="courses">Courses</a></li>
+                        <li><a href="#" data-section="resources">Resources</a></li>
+                        <li><a href="#" data-section="tutoring">Tutoring</a></li>
+                        <li><a href="#" data-section="tech-stack">Technology</a></li>
+                        <li><a href="#" data-section="contact">Contact</a></li>
+                        <li><a href="#" id="footer-login">Login</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact & Get Involved</h3>
+                    <p><strong>Edris Abdella – Project Lead</strong></p>
+                    <p><i class="fas fa-envelope"></i> Email: edrisabdella178@gmail.com</p>
+                    <p><i class="fas fa-phone"></i> Phone: +251905131051</p>
+                    <p><i class="fas fa-map-marker-alt"></i> Location: Dire Dawa, Ethiopia</p>
+                    <p><i class="fab fa-linkedin"></i> LinkedIn: <a href="https://www.linkedin.com/in/edris-abdella-nuure-7aa521177" target="_blank">Edris Abdella Nuure</a></p>
+                    <p><i class="fab fa-github"></i> GitHub: <a href="https://github.com/Edrisabdella" target="_blank">Edrisabdella</a></p>
+                </div>
+                <div class="footer-section">
+                    <h3>Project Links</h3>
+                    <p><i class="fas fa-globe"></i> Live Demo: <a href="https://vercel.com/edris-abdellas-projects/sdg-4-quality-education-project" target="_blank">Vercel Deployment</a></p>
+                    <p><i class="fab fa-github"></i> Repository: <a href="https://github.com/Edrisabdella/SDG-4_Quality-Education-Project.git" target="_blank">GitHub Repository</a></p>
+                    <p><i class="fas fa-database"></i> Database: MongoDB</p>
+                    <p><i class="fas fa-code"></i> Stack: MERN (MongoDB, Express, React, Node.js)</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 OpenLearn. All rights reserved. | Designed for SDG 4: Quality Education Tech. by Edris Abdella</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Login Modal -->
+    <div class="modal" id="login-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Login to OpenLearn</h3>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="login-form">
+                    <div class="form-group">
+                        <label class="form-label" for="login-email">Email</label>
+                        <input type="email" id="login-email" class="form-input" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="login-password">Password</label>
+                        <input type="password" id="login-password" class="form-input" required>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary" style="width: 100%;">Login</button>
+                    </div>
+                    <p class="text-center">Don't have an account? <a href="#" id="show-register">Register here</a></p>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Register Modal -->
+    <div class="modal" id="register-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Join OpenLearn</h3>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="register-form">
+                    <div class="form-group">
+                        <label class="form-label" for="register-name">Full Name</label>
+                        <input type="text" id="register-name" class="form-input" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="register-email">Email</label>
+                        <input type="email" id="register-email" class="form-input" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="register-password">Password</label>
+                        <input type="password" id="register-password" class="form-input" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="register-role">I want to join as:</label>
+                        <select id="register-role" class="form-select">
+                            <option value="student">Student</option>
+                            <option value="tutor">Professional Expert</option>
+                            <option value="volunteer">Volunteer</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary" style="width: 100%;">Create Account</button>
+                    </div>
+                    <p class="text-center">Already have an account? <a href="#" id="show-login">Login here</a></p>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Payment Modal -->
+    <div class="modal" id="payment-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Enroll in Premium Course</h3>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div id="payment-course-info">
+                    <!-- Course info will be populated here -->
+                </div>
+                
+                <div class="payment-methods">
+                    <div class="payment-method active" data-method="paypal">
+                        <div class="payment-method-icon">
+                            <i class="fab fa-cc-paypal"></i>
+                        </div>
+                        <h4>PayPal</h4>
+                        <p>Pay with your PayPal account</p>
+                    </div>
+                    <div class="payment-method" data-method="card">
+                        <div class="payment-method-icon">
+                            <i class="fas fa-credit-card"></i>
+                        </div>
+                        <h4>Credit/Debit Card</h4>
+                        <p>Pay with your card</p>
+                    </div>
+                </div>
+                
+                <div class="payment-form">
+                    <form id="payment-form">
+                        <div class="form-group">
+                            <label class="form-label" for="card-number">Card Number</label>
+                            <input type="text" id="card-number" class="form-input" placeholder="1234 5678 9012 3456">
+                        </div>
+                        <div class="form-group" style="display: flex; gap: 1rem;">
+                            <div style="flex: 1;">
+                                <label class="form-label" for="card-expiry">Expiry Date</label>
+                                <input type="text" id="card-expiry" class="form-input" placeholder="MM/YY">
+                            </div>
+                            <div style="flex: 1;">
+                                <label class="form-label" for="card-cvc">CVC</label>
+                                <input type="text" id="card-cvc" class="form-input" placeholder="123">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="card-name">Name on Card</label>
+                            <input type="text" id="card-name" class="form-input" placeholder="Edris Abdella Nuure">
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary" style="width: 100%;">Pay Now</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Application State
+        let currentUser = null;
+        let isLoggedIn = false;
+        let currentPage = 'home';
+        let heroImages = [
+            'https://i.ibb.co/Kjhf4bz7/openlearn1.jpg',
+            'https://i.ibb.co/XZKbP9Bn/openlearn2.jpg',
+            'https://i.ibb.co/4g8Bk5Yw/openlearn3.jpg',
+            'https://i.ibb.co/Xx8jpb2X/openlearn4.jpg',
+            'https://i.ibb.co/8g2xksfq/openlearn5.jpg',
+            'https://i.ibb.co/0RXjGVGR/openlearn6.jpg',
+            'https://i.ibb.co/gMsqnSJS/edris-with.jpg'
+        ];
+        let currentHeroImageIndex = 0;
+
+        // Sample data
+        const sampleCourses = [
+            {
+                id: 1,
+                title: "Introduction to JavaScript",
+                description: "Learn the fundamentals of JavaScript programming language from scratch.",
+                category: "programming",
+                instructor: "Edris Expert team",
+                level: "beginner",
+                duration: "8 hours",
+                students: 1250,
+                rating: 4.7,
+                isPremium: false,
+                thumbnail: "https://images.unsplash.com/photo-1627398242454-45a1465c2479?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+                date: "December 1, 2025",
+                price: 0,
+                content: [
+                    { title: "Introduction to JavaScript", duration: "30 min" },
+                    { title: "Variables and Data Types", duration: "45 min" },
+                    { title: "Functions and Scope", duration: "60 min" },
+                    { title: "DOM Manipulation", duration: "75 min" },
+                    { title: "Event Handling", duration: "45 min" },
+                    { title: "Final Project", duration: "90 min" }
+                ]
+            },
+            {
+                id: 2,
+                title: "Advanced Python Programming",
+                description: "Master advanced Python concepts including OOP, data structures, and algorithms.",
+                category: "programming",
+                instructor: "Eng. Hykel Mohammed",
+                level: "advanced",
+                duration: "12 hours",
+                students: 890,
+                rating: 4.9,
+                isPremium: true,
+                thumbnail: "https://i.ibb.co/Tq4zyFbD/Python-Programming.jpg",
+                date: "October 15, 2025",
+                price: 49.99,
+                content: [
+                    { title: "Python Review and Advanced Concepts", duration: "60 min" },
+                    { title: "Object-Oriented Programming", duration: "90 min" },
+                    { title: "Data Structures", duration: "120 min" },
+                    { title: "Algorithms and Complexity", duration: "90 min" },
+                    { title: "File Handling and Modules", duration: "60 min" },
+                    { title: "Web Scraping with Python", duration: "75 min" },
+                    { title: "Final Project", duration: "120 min" }
+                ]
+            },
+            {
+                id: 3,
+                title: "Web Development Bootcamp",
+                description: "Complete full-stack web development course covering HTML, CSS, JavaScript, and Node.js.",
+                category: "programming",
+                instructor: "Dr. Salomon Bekela",
+                level: "intermediate",
+                duration: "40 hours",
+                students: 3200,
+                rating: 4.8,
+                isPremium: false,
+                thumbnail: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+                date: "November 10, 2025",
+                price: 0,
+                content: [
+                    { title: "HTML Fundamentals", duration: "120 min" },
+                    { title: "CSS Styling and Layout", duration: "180 min" },
+                    { title: "JavaScript Basics", duration: "240 min" },
+                    { title: "Responsive Design", duration: "120 min" },
+                    { title: "Introduction to Node.js", duration: "180 min" },
+                    { title: "Database Integration", duration: "180 min" },
+                    { title: "Final Project", duration: "300 min" }
+                ]
+            },
+            {
+                id: 4,
+                title: "Training on the General Examination",
+                description: "Comprehensive preparation course for general examination with practice tests and strategies.",
+                category: "test-prep",
+                instructor: "Eng. Edris Abdella",
+                level: "beginner",
+                duration: "10 hours",
+                students: 2100,
+                rating: 4.6,
+                isPremium: false,
+                thumbnail: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+                date: "October 20, 2025",
+                price: 0,
+                content: [
+                    { title: "Exam Structure and Strategy", duration: "60 min" },
+                    { title: "Mathematics Review", duration: "120 min" },
+                    { title: "Verbal Reasoning", duration: "90 min" },
+                    { title: "Quantitative Analysis", duration: "120 min" },
+                    { title: "Practice Tests and Review", duration: "150 min" }
+                ]
+            },
+            {
+                id: 5,
+                title: "Calculus for Engineers",
+                description: "Comprehensive calculus course tailored for engineering students.",
+                category: "mathematics",
+                instructor: "Hon. Abdi Osman",
+                level: "intermediate",
+                duration: "15 hours",
+                students: 1500,
+                rating: 4.5,
+                isPremium: true,
+                thumbnail: "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+                date: "September 25, 2025",
+                price: 39.99,
+                content: [
+                    { title: "Limits and Continuity", duration: "90 min" },
+                    { title: "Derivatives", duration: "120 min" },
+                    { title: "Applications of Derivatives", duration: "120 min" },
+                    { title: "Integrals", duration: "150 min" },
+                    { title: "Applications of Integrals", duration: "120 min" },
+                    { title: "Differential Equations", duration: "120 min" }
+                ]
+            },
+            {
+                id: 6,
+                title: "Software Maintenance",
+                description: "Learn software maintenance principles, techniques, and best practices.",
+                category: "programming",
+                instructor: "Dr. Girma Urgessa",
+                level: "intermediate",
+                duration: "12 hours",
+                students: 1800,
+                rating: 4.7,
+                isPremium: false,
+                thumbnail: "https://images.unsplash.com/photo-1517077304055-6e89abbf09b0?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+                date: "November 5, 2025",
+                price: 0,
+                content: [
+                    { title: "Introduction to Software Maintenance", duration: "60 min" },
+                    { title: "Maintenance Processes", duration: "90 min" },
+                    { title: "Debugging Techniques", duration: "120 min" },
+                    { title: "Refactoring", duration: "120 min" },
+                    { title: "Version Control Systems", duration: "90 min" },
+                    { title: "Case Studies", duration: "120 min" }
+                ]
+            }
+        ];
+
+        const sampleResources = [
+            {
+                id: 1,
+                title: "JavaScript Cheat Sheet",
+                description: "Comprehensive reference guide for JavaScript syntax and methods.",
+                category: "programming",
+                fileType: "pdf",
+                downloads: 1250,
+                rating: 4.8
+            },
+            {
+                id: 2,
+                title: "Python Data Structures Guide",
+                description: "Detailed explanation of Python data structures with examples.",
+                category: "programming",
+                fileType: "pdf",
+                downloads: 890,
+                rating: 4.7
+            },
+            {
+                id: 3,
+                title: "HTML & CSS Reference",
+                description: "Quick reference for HTML tags and CSS properties.",
+                category: "programming",
+                fileType: "pdf",
+                downloads: 2100,
+                rating: 4.6
+            },
+            {
+                id: 4,
+                title: "Mathematics Formula Sheet",
+                description: "Collection of essential mathematical formulas for quick reference.",
+                category: "mathematics",
+                fileType: "pdf",
+                downloads: 1500,
+                rating: 4.5
+            },
+            {
+                id: 5,
+                title: "Software Maintenance Manuals",
+                description: "Comprehensive guides for software maintenance processes and procedures.",
+                category: "programming",
+                fileType: "pdf",
+                downloads: 1200,
+                rating: 4.4
+            },
+            {
+                id: 6,
+                title: "Chemistry Lab Safety Guide",
+                description: "Essential safety procedures for chemistry laboratory work.",
+                category: "science",
+                fileType: "pdf",
+                downloads: 800,
+                rating: 4.7
+            }
+        ];
+
+        const sampleTutoringSessions = [
+            {
+                id: 1,
+                tutor: "Hon. Abdi Osman and Edris Expert team",
+                subject: "Mathematics",
+                topic: "Calculus Derivatives",
+                scheduledTime: "2025-10-15T14:00:00",
+                duration: 60,
+                status: "completed",
+                rating: 5
+            },
+            {
+                id: 2,
+                tutor: "Eng. Hykel Mohammed and Dr. Salomon Bekela",
+                subject: "Programming",
+                topic: "Python Data Structures",
+                scheduledTime: "2025-10-20T16:30:00",
+                duration: 90,
+                status: "scheduled"
+            }
+        ];
+
+        // DOM Elements
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const navLinks = document.querySelector('.nav-links');
+        const loginBtn = document.getElementById('login-btn');
+        const footerLogin = document.getElementById('footer-login');
+        const joinMissionBtn = document.getElementById('join-mission-btn');
+        const getInvolvedBtn = document.getElementById('get-involved-btn');
+        const findTutorBtn = document.getElementById('find-tutor-btn');
+        const loginModal = document.getElementById('login-modal');
+        const registerModal = document.getElementById('register-modal');
+        const paymentModal = document.getElementById('payment-modal');
+        const modalCloses = document.querySelectorAll('.modal-close');
+        const showRegister = document.getElementById('show-register');
+        const showLogin = document.getElementById('show-login');
+        const loginForm = document.getElementById('login-form');
+        const registerForm = document.getElementById('register-form');
+        const paymentForm = document.getElementById('payment-form');
+        const profileForm = document.getElementById('profile-form');
+        const securityForm = document.getElementById('security-form');
+        const uploadResourceForm = document.getElementById('upload-resource-form');
+        const tutorApplicationForm = document.getElementById('tutor-application-form');
+        const contactForm = document.getElementById('contact-form');
+        const coursesContainer = document.getElementById('courses-container');
+        const resourcesContainer = document.getElementById('resources-container');
+        const userCoursesContainer = document.getElementById('user-courses-container');
+        const userResourcesContainer = document.getElementById('user-resources-container');
+        const allCoursesContainer = document.getElementById('all-courses-container');
+        const allResourcesContainer = document.getElementById('all-resources-container');
+        const myUploadsContainer = document.getElementById('my-uploads-container');
+        const courseDetailContainer = document.getElementById('course-detail-container');
+        const tabHeaders = document.querySelectorAll('.tab-header');
+        const tabContents = document.querySelectorAll('.tab-content');
+        const scheduleSessionBtn = document.getElementById('schedule-session-btn');
+        const uploadResourceBtn = document.getElementById('upload-resource-btn');
+        const fileUploadArea = document.getElementById('file-upload-area');
+        const fileInput = document.getElementById('file-input');
+        const fileList = document.getElementById('file-list');
+        const changeAvatarBtn = document.getElementById('change-avatar-btn');
+        const avatarUpload = document.getElementById('avatar-upload');
+        const savePreferencesBtn = document.getElementById('save-preferences');
+        const toast = document.getElementById('toast');
+        const pages = document.querySelectorAll('.page');
+        const heroSection = document.querySelector('.hero');
+
+        // Initialize the application
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check if user is logged in
+            checkLoginStatus();
+            
+            // Load initial data
+            loadCourses();
+            loadResources();
+            animateMetrics();
+            
+            // Set up event listeners
+            setupEventListeners();
+            
+            // Start hero image rotation
+            startHeroImageRotation();
+        });
+
+        // Set up all event listeners
+        function setupEventListeners() {
+            // Mobile menu toggle
+            mobileMenuBtn.addEventListener('click', toggleMobileMenu);
+            
+            // Navigation
+            document.querySelectorAll('.nav-links a, .footer-section a').forEach(link => {
+                if (link.getAttribute('data-page')) {
+                    link.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        const page = link.getAttribute('data-page');
+                        navigateTo(page);
+                    });
+                }
+                
+                if (link.getAttribute('data-section')) {
+                    link.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        const section = link.getAttribute('data-section');
+                        
+                        // If we're already on the home page, scroll to the section
+                        if (currentPage === 'home') {
+                            scrollToSection(section);
+                        } else {
+                            // Otherwise, navigate to home and then scroll to section
+                            navigateTo('home');
+                            setTimeout(() => {
+                                scrollToSection(section);
+                            }, 500);
+                        }
+                    });
+                }
+            });
+            
+            // Modal triggers
+            loginBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                openModal(loginModal);
+            });
+            
+            footerLogin.addEventListener('click', (e) => {
+                e.preventDefault();
+                openModal(loginModal);
+            });
+            
+            joinMissionBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                if (isLoggedIn) {
+                    navigateTo('dashboard');
+                } else {
+                    openModal(registerModal);
+                }
+            });
+            
+            getInvolvedBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                if (isLoggedIn) {
+                    navigateTo('dashboard');
+                } else {
+                    openModal(registerModal);
+                }
+            });
+            
+            findTutorBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                if (isLoggedIn) {
+                    navigateTo('tutoring');
+                } else {
+                    openModal(loginModal);
+                }
+            });
+            
+            uploadResourceBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                if (isLoggedIn) {
+                    navigateTo('upload');
+                } else {
+                    openModal(loginModal);
+                }
+            });
+            
+            // Modal closes
+            modalCloses.forEach(closeBtn => {
+                closeBtn.addEventListener('click', closeAllModals);
+            });
+            
+            // Switch between login and register modals
+            showRegister.addEventListener('click', (e) => {
+                e.preventDefault();
+                closeAllModals();
+                openModal(registerModal);
+            });
+            
+            showLogin.addEventListener('click', (e) => {
+                e.preventDefault();
+                closeAllModals();
+                openModal(loginModal);
+            });
+            
+            // Form submissions
+            loginForm.addEventListener('submit', handleLogin);
+            registerForm.addEventListener('submit', handleRegister);
+            paymentForm.addEventListener('submit', handlePayment);
+            profileForm.addEventListener('submit', handleProfileUpdate);
+            securityForm.addEventListener('submit', handlePasswordChange);
+            uploadResourceForm.addEventListener('submit', handleResourceUpload);
+            tutorApplicationForm.addEventListener('submit', handleTutorApplication);
+            contactForm.addEventListener('submit', handleContactForm);
+            
+            // Tab switching
+            tabHeaders.forEach(header => {
+                header.addEventListener('click', () => {
+                    const tabId = header.getAttribute('data-tab');
+                    switchTab(tabId);
+                });
+            });
+            
+            // Dashboard actions
+            scheduleSessionBtn.addEventListener('click', () => {
+                showToast('Tutoring session scheduling feature coming soon!', 'info');
+            });
+            
+            // File upload
+            fileUploadArea.addEventListener('click', () => {
+                fileInput.click();
+            });
+            
+            fileUploadArea.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                fileUploadArea.classList.add('dragover');
+            });
+            
+            fileUploadArea.addEventListener('dragleave', () => {
+                fileUploadArea.classList.remove('dragover');
+            });
+            
+            fileUploadArea.addEventListener('drop', (e) => {
+                e.preventDefault();
+                fileUploadArea.classList.remove('dragover');
+                
+                const files = e.dataTransfer.files;
+                if (files.length > 0) {
+                    handleFileUpload(files);
+                }
+            });
+            
+            fileInput.addEventListener('change', (e) => {
+                if (e.target.files.length > 0) {
+                    handleFileUpload(e.target.files);
+                }
+            });
+            
+            // Avatar change
+            changeAvatarBtn.addEventListener('click', () => {
+                avatarUpload.click();
+            });
+            
+            avatarUpload.addEventListener('change', (e) => {
+                if (e.target.files.length > 0) {
+                    handleAvatarUpload(e.target.files[0]);
+                }
+            });
+            
+            // Preferences
+            savePreferencesBtn.addEventListener('click', savePreferences);
+            
+            // Close modals when clicking outside
+            window.addEventListener('click', (e) => {
+                if (e.target.classList.contains('modal')) {
+                    closeAllModals();
+                }
+            });
+            
+            // Payment method selection
+            document.querySelectorAll('.payment-method').forEach(method => {
+                method.addEventListener('click', () => {
+                    document.querySelectorAll('.payment-method').forEach(m => {
+                        m.classList.remove('active');
+                    });
+                    method.classList.add('active');
+                });
+            });
+            
+            // Course search and filter
+            const courseSearch = document.getElementById('course-search');
+            const courseCategory = document.getElementById('course-category');
+            const courseLevel = document.getElementById('course-level');
+            
+            if (courseSearch) {
+                courseSearch.addEventListener('input', filterCourses);
+            }
+            
+            if (courseCategory) {
+                courseCategory.addEventListener('change', filterCourses);
+            }
+            
+            if (courseLevel) {
+                courseLevel.addEventListener('change', filterCourses);
+            }
+            
+            // Resource search and filter
+            const resourceSearch = document.getElementById('resource-search');
+            const resourceCategory = document.getElementById('resource-category');
+            
+            if (resourceSearch) {
+                resourceSearch.addEventListener('input', filterResources);
+            }
+            
+            if (resourceCategory) {
+                resourceCategory.addEventListener('change', filterResources);
+            }
+        }
+
+        // Start hero image rotation
+        function startHeroImageRotation() {
+            // Set initial background
+            updateHeroBackground();
+            
+            // Change background every 5 seconds
+            setInterval(() => {
+                currentHeroImageIndex = (currentHeroImageIndex + 1) % heroImages.length;
+                updateHeroBackground();
+            }, 5000);
+        }
+        
+        function updateHeroBackground() {
+            heroSection.style.backgroundImage = `linear-gradient(rgba(10, 151, 217, 0.8), rgba(26, 75, 140, 0.9)), url('${heroImages[currentHeroImageIndex]}')`;
+        }
+
+        // Toggle mobile menu
+        function toggleMobileMenu() {
+            navLinks.classList.toggle('active');
+        }
+
+        // Navigate to a page
+        function navigateTo(page) {
+            // Hide all pages
+            pages.forEach(p => p.classList.remove('active'));
+            
+            // Show the requested page
+            document.getElementById(`${page}-page`).classList.add('active');
+            
+            // Update current page
+            currentPage = page;
+            
+            // Update navigation
+            updateNavigation();
+            
+            // Load page-specific content
+            if (page === 'courses') {
+                loadAllCourses();
+            } else if (page === 'resources') {
+                loadAllResources();
+            } else if (page === 'dashboard') {
+                loadDashboard();
+            } else if (page === 'profile') {
+                loadProfile();
+            } else if (page === 'upload') {
+                loadMyUploads();
+            } else if (page === 'tutoring') {
+                loadTutoringSessions();
+            }
+            
+            // Close mobile menu
+            navLinks.classList.remove('active');
+            
+            // Scroll to top
+            window.scrollTo(0, 0);
+        }
+
+        // Scroll to a specific section on the home page
+        function scrollToSection(sectionId) {
+            const section = document.getElementById(sectionId);
+            if (section) {
+                // Calculate offset to account for fixed header
+                const headerHeight = document.querySelector('header').offsetHeight;
+                const sectionPosition = section.getBoundingClientRect().top + window.pageYOffset - headerHeight;
+                
+                // Smooth scroll to section
+                window.scrollTo({
+                    top: sectionPosition,
+                    behavior: 'smooth'
+                });
+                
+                // Update active navigation link
+                document.querySelectorAll('.nav-links a').forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('data-section') === sectionId) {
+                        link.classList.add('active');
+                    }
+                });
+            }
+        }
+
+        // Update navigation based on login status
+        function updateNavigation() {
+            if (isLoggedIn) {
+                loginBtn.textContent = 'Dashboard';
+                loginBtn.setAttribute('data-page', 'dashboard');
+            } else {
+                loginBtn.textContent = 'Login';
+                loginBtn.removeAttribute('data-page');
+            }
+            
+            // Update active navigation link
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                if (link.getAttribute('data-page') === currentPage) {
+                    link.classList.add('active');
+                } else {
+                    link.classList.remove('active');
+                }
+            });
+        }
+
+        // Open a modal
+        function openModal(modal) {
+            closeAllModals();
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        // Close all modals
+        function closeAllModals() {
+            document.querySelectorAll('.modal').forEach(modal => {
+                modal.classList.remove('active');
+            });
+            document.body.style.overflow = 'auto';
+        }
+
+        // Switch between tabs
+        function switchTab(tabId) {
+            // Update tab headers
+            tabHeaders.forEach(header => {
+                header.classList.toggle('active', header.getAttribute('data-tab') === tabId);
+            });
+            
+            // Update tab contents
+            tabContents.forEach(content => {
+                content.classList.toggle('active', content.id === `${tabId}-tab`);
+            });
+            
+            // Load tab content if needed
+            if (tabId === 'courses') {
+                loadUserCourses();
+            } else if (tabId === 'resources') {
+                loadUserResources();
+            } else if (tabId === 'sessions') {
+                loadTutoringSessions();
+            }
+        }
+
+        // Handle login form submission
+        function handleLogin(e) {
+            e.preventDefault();
+            const email = document.getElementById('login-email').value;
+            const password = document.getElementById('login-password').value;
+            
+            // Simple validation
+            if (!email || !password) {
+                showToast('Please fill in all fields', 'error');
+                return;
+            }
+            
+            // For demo purposes, any login works
+            currentUser = {
+                name: email.split('@')[0],
+                email: email,
+                role: 'student',
+                bio: 'I am passionate about learning and sharing knowledge.',
+                location: 'Dire Dawa, Ethiopia',
+                enrolledCourses: [1, 3, 6],
+                completedCourses: [1],
+                learningHours: 24,
+                badges: 3,
+                preferences: {
+                    emailNotifications: true,
+                    courseUpdates: true,
+                    tutoringReminders: true,
+                    resourceAlerts: true
+                }
+            };
+            
+            // Update UI
+            updateUIForUser();
+            
+            // Close modal and show success message
+            closeAllModals();
+            showToast(`Welcome back, ${currentUser.name}!`, 'success');
+            
+            // Simulate email notification
+            simulateEmailNotification('login', currentUser);
+            
+            // Navigate to dashboard
+            navigateTo('dashboard');
+        }
+
+        // Handle register form submission
+        function handleRegister(e) {
+            e.preventDefault();
+            const name = document.getElementById('register-name').value;
+            const email = document.getElementById('register-email').value;
+            const password = document.getElementById('register-password').value;
+            const role = document.getElementById('register-role').value;
+            
+            // Simple validation
+            if (!name || !email || !password) {
+                showToast('Please fill in all fields', 'error');
+                return;
+            }
+            
+            // For demo purposes, any registration works
+            currentUser = {
+                name: name,
+                email: email,
+                role: role,
+                bio: '',
+                location: '',
+                enrolledCourses: [],
+                completedCourses: [],
+                learningHours: 0,
+                badges: 0,
+                preferences: {
+                    emailNotifications: true,
+                    courseUpdates: true,
+                    tutoringReminders: true,
+                    resourceAlerts: true
+                }
+            };
+            
+            // Update UI
+            updateUIForUser();
+            
+            // Close modal and show success message
+            closeAllModals();
+            showToast(`Welcome to OpenLearn, ${currentUser.name}!`, 'success');
+            
+            // Simulate email notification
+            simulateEmailNotification('registration', currentUser);
+            
+            // Navigate to dashboard
+            navigateTo('dashboard');
+        }
+
+        // Handle payment form submission
+        function handlePayment(e) {
+            e.preventDefault();
+            const cardNumber = document.getElementById('card-number').value;
+            const cardExpiry = document.getElementById('card-expiry').value;
+            const cardCvc = document.getElementById('card-cvc').value;
+            const cardName = document.getElementById('card-name').value;
+            
+            // Simple validation
+            if (!cardNumber || !cardExpiry || !cardCvc || !cardName) {
+                showToast('Please fill in all payment details', 'error');
+                return;
+            }
+            
+            // Get course ID from modal data
+            const courseId = paymentModal.getAttribute('data-course-id');
+            const course = sampleCourses.find(c => c.id == courseId);
+            
+            // For demo purposes, payment is always successful
+            closeAllModals();
+            showToast(`Payment successful! You are now enrolled in ${course.title}`, 'success');
+            
+            // Add course to user's enrolled courses
+            if (!currentUser.enrolledCourses.includes(courseId)) {
+                currentUser.enrolledCourses.push(courseId);
+            }
+            
+            // Update UI
+            updateUIForUser();
+        }
+
+        // Handle profile update
+        function handleProfileUpdate(e) {
+            e.preventDefault();
+            const name = document.getElementById('edit-name').value;
+            const email = document.getElementById('edit-email').value;
+            const bio = document.getElementById('edit-bio').value;
+            const location = document.getElementById('edit-location').value;
+            
+            // Update user data
+            currentUser.name = name;
+            currentUser.email = email;
+            currentUser.bio = bio;
+            currentUser.location = location;
+            
+            // Update UI
+            updateUIForUser();
+            
+            // Show success message
+            showToast('Profile updated successfully!', 'success');
+        }
+
+        // Handle password change
+        function handlePasswordChange(e) {
+            e.preventDefault();
+            const currentPassword = document.getElementById('current-password').value;
+            const newPassword = document.getElementById('new-password').value;
+            const confirmPassword = document.getElementById('confirm-password').value;
+            
+            // Simple validation
+            if (!currentPassword || !newPassword || !confirmPassword) {
+                showToast('Please fill in all fields', 'error');
+                return;
+            }
+            
+            if (newPassword !== confirmPassword) {
+                showToast('New passwords do not match', 'error');
+                return;
+            }
+            
+            // For demo purposes, password change is always successful
+            showToast('Password changed successfully!', 'success');
+            
+            // Clear form
+            securityForm.reset();
+        }
+
+        // Handle resource upload
+        function handleResourceUpload(e) {
+            e.preventDefault();
+            const title = document.getElementById('resource-title').value;
+            const description = document.getElementById('resource-description').value;
+            const category = document.getElementById('resource-category').value;
+            
+            // Simple validation
+            if (!title || !description || !category) {
+                showToast('Please fill in all fields', 'error');
+                return;
+            }
+            
+            // Create new resource
+            const newResource = {
+                id: sampleResources.length + 1,
+                title,
+                description,
+                category,
+                fileType: 'pdf',
+                downloads: 0,
+                rating: 0,
+                uploadedBy: currentUser.name
+            };
+            
+            // Add to resources
+            sampleResources.unshift(newResource);
+            
+            // Update UI
+            loadAllResources();
+            loadMyUploads();
+            
+            // Reset form
+            uploadResourceForm.reset();
+            fileList.innerHTML = '';
+            
+            // Show success message
+            showToast('Resource uploaded successfully!', 'success');
+        }
+
+        // Handle tutor application
+        function handleTutorApplication(e) {
+            e.preventDefault();
+            const subject = document.getElementById('tutor-subject').value;
+            const experience = document.getElementById('tutor-experience').value;
+            const qualifications = document.getElementById('tutor-qualifications').value;
+            const availability = document.getElementById('tutor-availability').value;
+            
+            // Simple validation
+            if (!subject || !experience || !qualifications || !availability) {
+                showToast('Please fill in all fields', 'error');
+                return;
+            }
+            
+            // For demo purposes, application is always successful
+            showToast('Tutor application submitted successfully! We will review your application and contact you soon.', 'success');
+            
+            // Reset form
+            tutorApplicationForm.reset();
+        }
+
+        // Handle contact form
+        function handleContactForm(e) {
+            e.preventDefault();
+            const name = document.getElementById('contact-name').value;
+            const email = document.getElementById('contact-email').value;
+            const subject = document.getElementById('contact-subject').value;
+            const message = document.getElementById('contact-message').value;
+            
+            // Simple validation
+            if (!name || !email || !subject || !message) {
+                showToast('Please fill in all fields', 'error');
+                return;
+            }
+            
+            // For demo purposes, message is always sent
+            showToast('Message sent successfully! We will get back to you soon.', 'success');
+            
+            // Reset form
+            contactForm.reset();
+        }
+
+        // Handle file upload
+        function handleFileUpload(files) {
+            Array.from(files).forEach(file => {
+                // Validate file type and size
+                const allowedTypes = ['application/pdf', 'application/msword', 
+                                     'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+                                     'application/vnd.ms-powerpoint',
+                                     'application/vnd.openxmlformats-officedocument.presentationml.presentation',
+                                     'image/jpeg', 'image/png', 'image/gif'];
+                const maxSize = 10 * 1024 * 1024; // 10MB
+                
+                if (!allowedTypes.includes(file.type)) {
+                    showToast('File type not allowed. Please upload PDFs, documents, presentations, or images.', 'error');
+                    return;
+                }
+                
+                if (file.size > maxSize) {
+                    showToast('File size exceeds 10MB limit.', 'error');
+                    return;
+                }
+                
+                // Create file item
+                const fileItem = document.createElement('div');
+                fileItem.className = 'file-item';
+                fileItem.innerHTML = `
+                    <div class="file-info">
+                        <div class="file-icon">
+                            <i class="fas fa-file"></i>
+                        </div>
+                        <div class="file-details">
+                            <h4>${file.name}</h4>
+                            <p>${formatFileSize(file.size)}</p>
+                        </div>
+                    </div>
+                    <div class="file-actions">
+                        <button class="btn btn-outline remove-file">Remove</button>
+                    </div>
+                `;
+                
+                // Add remove functionality
+                const removeBtn = fileItem.querySelector('.remove-file');
+                removeBtn.addEventListener('click', () => {
+                    fileItem.remove();
+                });
+                
+                // Add to file list
+                fileList.appendChild(fileItem);
+            });
+        }
+
+        // Handle avatar upload
+        function handleAvatarUpload(file) {
+            // Validate file type and size
+            const allowedTypes = ['image/jpeg', 'image/png', 'image/gif'];
+            const maxSize = 5 * 1024 * 1024; // 5MB
+            
+            if (!allowedTypes.includes(file.type)) {
+                showToast('Please upload a valid image file (JPEG, PNG, GIF).', 'error');
+                return;
+            }
+            
+            if (file.size > maxSize) {
+                showToast('Image size exceeds 5MB limit.', 'error');
+                return;
+            }
+            
+            // Create a preview
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                document.getElementById('profile-avatar').src = e.target.result;
+                showToast('Avatar updated successfully!', 'success');
+            };
+            reader.readAsDataURL(file);
+        }
+
+        // Save preferences
+        function savePreferences() {
+            const emailNotifications = document.getElementById('email-notifications').checked;
+            const courseUpdates = document.getElementById('course-updates').checked;
+            const tutoringReminders = document.getElementById('tutoring-reminders').checked;
+            const resourceAlerts = document.getElementById('resource-alerts').checked;
+            
+            // Update user preferences
+            currentUser.preferences = {
+                emailNotifications,
+                courseUpdates,
+                tutoringReminders,
+                resourceAlerts
+            };
+            
+            // Show success message
+            showToast('Preferences saved successfully!', 'success');
+        }
+
+        // Update UI when user logs in
+        function updateUIForUser() {
+            isLoggedIn = true;
+            updateNavigation();
+            
+            // Save user to localStorage for persistence
+            localStorage.setItem('openlearn_user', JSON.stringify(currentUser));
+        }
+
+        // Check login status
+        function checkLoginStatus() {
+            const userData = localStorage.getItem('openlearn_user');
+            if (userData) {
+                currentUser = JSON.parse(userData);
+                isLoggedIn = true;
+                updateNavigation();
+            }
+        }
+
+        // Load dashboard
+        function loadDashboard() {
+            if (!isLoggedIn) return;
+            
+            // Update dashboard stats
+            document.getElementById('user-courses-count').textContent = currentUser.enrolledCourses.length;
+            document.getElementById('user-sessions-count').textContent = '2';
+            document.getElementById('user-rating').textContent = '4.5';
+            document.getElementById('user-badges').textContent = currentUser.badges;
+            
+            // Load user courses and resources
+            loadUserCourses();
+            loadUserResources();
+            loadTutoringSessions();
+        }
+
+        // Load profile
+        function loadProfile() {
+            if (!isLoggedIn) return;
+            
+            // Populate profile form
+            document.getElementById('profile-name').textContent = currentUser.name;
+            document.getElementById('profile-email').textContent = currentUser.email;
+            document.getElementById('profile-role').textContent = currentUser.role.charAt(0).toUpperCase() + currentUser.role.slice(1);
+            
+            document.getElementById('edit-name').value = currentUser.name;
+            document.getElementById('edit-email').value = currentUser.email;
+            document.getElementById('edit-bio').value = currentUser.bio || '';
+            document.getElementById('edit-location').value = currentUser.location || '';
+            
+            // Update profile stats
+            document.getElementById('profile-courses').textContent = currentUser.enrolledCourses.length;
+            document.getElementById('profile-completed').textContent = currentUser.completedCourses.length;
+            document.getElementById('profile-hours').textContent = currentUser.learningHours;
+            document.getElementById('profile-badges').textContent = currentUser.badges;
+            
+            // Set preferences
+            document.getElementById('email-notifications').checked = currentUser.preferences.emailNotifications;
+            document.getElementById('course-updates').checked = currentUser.preferences.courseUpdates;
+            document.getElementById('tutoring-reminders').checked = currentUser.preferences.tutoringReminders;
+            document.getElementById('resource-alerts').checked = currentUser.preferences.resourceAlerts;
+        }
+
+        // Load courses into the courses container
+        function loadCourses() {
+            coursesContainer.innerHTML = '';
+            
+            // Show only 3 courses on home page
+            sampleCourses.slice(0, 3).forEach(course => {
+                const courseCard = createCourseCard(course);
+                coursesContainer.appendChild(courseCard);
+            });
+        }
+
+        // Load all courses
+        function loadAllCourses() {
+            allCoursesContainer.innerHTML = '';
+            
+            sampleCourses.forEach(course => {
+                const courseCard = createCourseCard(course);
+                allCoursesContainer.appendChild(courseCard);
+            });
+        }
+
+        // Filter courses
+        function filterCourses() {
+            const searchTerm = document.getElementById('course-search').value.toLowerCase();
+            const categoryFilter = document.getElementById('course-category').value;
+            const levelFilter = document.getElementById('course-level').value;
+            
+            const filteredCourses = sampleCourses.filter(course => {
+                const matchesSearch = course.title.toLowerCase().includes(searchTerm) || 
+                                     course.description.toLowerCase().includes(searchTerm) ||
+                                     course.instructor.toLowerCase().includes(searchTerm);
+                const matchesCategory = categoryFilter === 'all' || course.category === categoryFilter;
+                const matchesLevel = levelFilter === 'all' || course.level === levelFilter;
+                
+                return matchesSearch && matchesCategory && matchesLevel;
+            });
+            
+            allCoursesContainer.innerHTML = '';
+            
+            if (filteredCourses.length === 0) {
+                allCoursesContainer.innerHTML = '<p style="grid-column: 1 / -1; text-align: center; padding: 2rem;">No courses found matching your criteria.</p>';
+            } else {
+                filteredCourses.forEach(course => {
+                    const courseCard = createCourseCard(course);
+                    allCoursesContainer.appendChild(courseCard);
+                });
+            }
+        }
+
+        // Filter resources
+        function filterResources() {
+            const searchTerm = document.getElementById('resource-search').value.toLowerCase();
+            const categoryFilter = document.getElementById('resource-category').value;
+            
+            const filteredResources = sampleResources.filter(resource => {
+                const matchesSearch = resource.title.toLowerCase().includes(searchTerm) || 
+                                     resource.description.toLowerCase().includes(searchTerm);
+                const matchesCategory = categoryFilter === 'all' || resource.category === categoryFilter;
+                
+                return matchesSearch && matchesCategory;
+            });
+            
+            allResourcesContainer.innerHTML = '';
+            
+            if (filteredResources.length === 0) {
+                allResourcesContainer.innerHTML = '<p style="grid-column: 1 / -1; text-align: center; padding: 2rem;">No resources found matching your criteria.</p>';
+            } else {
+                filteredResources.forEach(resource => {
+                    const resourceCard = createResourceCard(resource);
+                    allResourcesContainer.appendChild(resourceCard);
+                });
+            }
+        }
+
+        // Load user courses in dashboard
+        function loadUserCourses() {
+            userCoursesContainer.innerHTML = '';
+            
+            if (currentUser.enrolledCourses.length === 0) {
+                userCoursesContainer.innerHTML = '<p>You are not enrolled in any courses yet.</p>';
+                return;
+            }
+            
+            currentUser.enrolledCourses.forEach(courseId => {
+                const course = sampleCourses.find(c => c.id === courseId);
+                if (course) {
+                    const courseCard = createCourseCard(course, true);
+                    userCoursesContainer.appendChild(courseCard);
+                }
+            });
+        }
+
+        // Load resources into the resources container
+        function loadResources() {
+            resourcesContainer.innerHTML = '';
+            
+            // Show only 3 resources on home page
+            sampleResources.slice(0, 3).forEach(resource => {
+                const resourceCard = createResourceCard(resource);
+                resourcesContainer.appendChild(resourceCard);
+            });
+        }
+
+        // Load all resources
+        function loadAllResources() {
+            allResourcesContainer.innerHTML = '';
+            
+            sampleResources.forEach(resource => {
+                const resourceCard = createResourceCard(resource);
+                allResourcesContainer.appendChild(resourceCard);
+            });
+        }
+
+        // Load user resources in dashboard
+        function loadUserResources() {
+            userResourcesContainer.innerHTML = '';
+            
+            // For demo, show first 3 resources as downloaded
+            sampleResources.slice(0, 3).forEach(resource => {
+                const resourceCard = createResourceCard(resource, true);
+                userResourcesContainer.appendChild(resourceCard);
+            });
+        }
+
+        // Load user's uploaded resources
+        function loadMyUploads() {
+            myUploadsContainer.innerHTML = '';
+            
+            // For demo, show resources uploaded by the current user
+            const myResources = sampleResources.filter(r => r.uploadedBy === currentUser.name);
+            
+            if (myResources.length === 0) {
+                myUploadsContainer.innerHTML = '<p>You haven\'t uploaded any resources yet.</p>';
+                return;
+            }
+            
+            myResources.forEach(resource => {
+                const resourceCard = createResourceCard(resource, true);
+                myUploadsContainer.appendChild(resourceCard);
+            });
+        }
+
+        // Load tutoring sessions in dashboard
+        function loadTutoringSessions() {
+            const upcomingSessionsContainer = document.getElementById('upcoming-sessions');
+            const pastSessionsContainer = document.getElementById('past-sessions');
+            
+            // Clear existing content except headers
+            if (upcomingSessionsContainer) {
+                upcomingSessionsContainer.innerHTML = '<h4>Upcoming Sessions</h4>';
+            }
+            if (pastSessionsContainer) {
+                pastSessionsContainer.innerHTML = '<h4>Past Sessions</h4>';
+            }
+            
+            const upcoming = sampleTutoringSessions.filter(session => session.status === 'scheduled');
+            const past = sampleTutoringSessions.filter(session => session.status === 'completed');
+            
+            if (upcoming.length > 0 && upcomingSessionsContainer) {
+                upcoming.forEach(session => {
+                    const sessionElement = createSessionElement(session);
+                    upcomingSessionsContainer.appendChild(sessionElement);
+                });
+            } else if (upcomingSessionsContainer) {
+                upcomingSessionsContainer.innerHTML += '<p>No upcoming sessions.</p>';
+            }
+            
+            if (past.length > 0 && pastSessionsContainer) {
+                past.forEach(session => {
+                    const sessionElement = createSessionElement(session);
+                    pastSessionsContainer.appendChild(sessionElement);
+                });
+            } else if (pastSessionsContainer) {
+                pastSessionsContainer.innerHTML += '<p>No past sessions.</p>';
+            }
+        }
+
+        // Create a course card element
+        function createCourseCard(course, isEnrolled = false) {
+            const card = document.createElement('div');
+            card.className = 'course-card';
+            
+            card.innerHTML = `
+                <div class="course-image">
+                    <img src="${course.thumbnail}" alt="${course.title}" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+                <div class="course-content">
+                    <span class="course-category">${course.category}</span>
+                    ${course.isPremium ? '<span class="badge premium">Premium</span>' : ''}
+                    <h3 class="course-title">${course.title}</h3>
+                    <p class="course-description">${course.description}</p>
+                    <div class="course-meta">
+                        <span><i class="fas fa-user"></i> ${course.instructor}</span>
+                        <span><i class="fas fa-star"></i> ${course.rating}</span>
+                    </div>
+                    <div class="course-meta">
+                        <span><i class="fas fa-calendar"></i> ${course.date}</span>
+                        <span><i class="fas fa-clock"></i> ${course.duration}</span>
+                    </div>
+                    <div style="margin-top: 1rem;">
+                        ${isEnrolled ? 
+                            `<button class="btn btn-primary" style="width: 100%;" data-course-id="${course.id}">Continue Learning</button>` : 
+                            `<button class="btn ${course.isPremium ? 'btn-outline' : 'btn-primary'}" style="width: 100%;" data-course-id="${course.id}">
+                                ${course.isPremium ? 'Get Premium' : 'Enroll Now'}
+                            </button>`
+                        }
+                    </div>
+                </div>
+            `;
+            
+            // Add event listener for enroll button
+            const actionBtn = card.querySelector('button');
+            actionBtn.addEventListener('click', () => {
+                if (isEnrolled || !course.isPremium) {
+                    // Navigate to course detail
+                    showCourseDetail(course.id);
+                } else {
+                    // Show payment modal for premium courses
+                    showPaymentModal(course);
+                }
+            });
+            
+            return card;
+        }
+
+        // Show course detail
+        function showCourseDetail(courseId) {
+            const course = sampleCourses.find(c => c.id === courseId);
+            if (!course) return;
+            
+            courseDetailContainer.innerHTML = `
+                <div class="course-hero" style="background-image: url('${course.thumbnail}')">
+                    <div class="course-hero-content">
+                        <span class="course-category">${course.category}</span>
+                        ${course.isPremium ? '<span class="badge premium">Premium</span>' : ''}
+                        <h1>${course.title}</h1>
+                        <p>${course.description}</p>
+                    </div>
+                </div>
+                <div class="course-detail-content">
+                    <div class="course-info-grid">
+                        <div class="course-info-item">
+                            <i class="fas fa-user"></i>
+                            <div>
+                                <h4>Instructor</h4>
+                                <p>${course.instructor}</p>
+                            </div>
+                        </div>
+                        <div class="course-info-item">
+                            <i class="fas fa-clock"></i>
+                            <div>
+                                <h4>Duration</h4>
+                                <p>${course.duration}</p>
+                            </div>
+                        </div>
+                        <div class="course-info-item">
+                            <i class="fas fa-users"></i>
+                            <div>
+                                <h4>Students</h4>
+                                <p>${course.students}</p>
+                            </div>
+                        </div>
+                        <div class="course-info-item">
+                            <i class="fas fa-star"></i>
+                            <div>
+                                <h4>Rating</h4>
+                                <p>${course.rating}/5.0</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <h3>Course Content</h3>
+                    <div class="course-content-list" style="margin-top: 1rem;">
+                        ${course.content.map((item, index) => `
+                            <div style="display: flex; justify-content: space-between; align-items: center; padding: 1rem; border-bottom: 1px solid var(--gray-200);">
+                                <div>
+                                    <h4>${index + 1}. ${item.title}</h4>
+                                    <p style="color: var(--gray-600); margin-top: 0.25rem;">${item.duration}</p>
+                                </div>
+                                <button class="btn btn-outline">Start</button>
+                            </div>
+                        `).join('')}
+                    </div>
+                    
+                    <div style="margin-top: 2rem; text-align: center;">
+                        <button class="btn btn-primary" style="padding: 1rem 2rem;">Start Course</button>
+                    </div>
+                </div>
+            `;
+            
+            navigateTo('course-detail');
+        }
+
+        // Create a resource card element
+        function createResourceCard(resource, isDownloaded = false) {
+            const card = document.createElement('div');
+            card.className = 'resource-card';
+            
+            const iconClass = getFileTypeIcon(resource.fileType);
+            
+            card.innerHTML = `
+                <div class="resource-image">
+                    <i class="${iconClass}"></i>
+                </div>
+                <div class="resource-content">
+                    <span class="resource-category">${resource.category}</span>
+                    <h3 class="resource-title">${resource.title}</h3>
+                    <p class="resource-description">${resource.description}</p>
+                    <div class="resource-meta">
+                        <span><i class="fas fa-download"></i> ${resource.downloads}</span>
+                        <span><i class="fas fa-star"></i> ${resource.rating}</span>
+                    </div>
+                    ${resource.uploadedBy ? `<p><small>Uploaded by: ${resource.uploadedBy}</small></p>` : ''}
+                    <div style="margin-top: 1rem;">
+                        <button class="btn btn-primary" style="width: 100%;" data-resource-id="${resource.id}">
+                            ${isDownloaded ? 'View Resource' : 'Download'}
+                        </button>
+                    </div>
+                </div>
+            `;
+            
+            // Add event listener for download button
+            const downloadBtn = card.querySelector('button');
+            downloadBtn.addEventListener('click', () => {
+                if (!isDownloaded) {
+                    resource.downloads += 1;
+                    showToast(`Downloaded ${resource.title} successfully!`, 'success');
+                    downloadBtn.textContent = 'View Resource';
+                } else {
+                    showToast(`Opening ${resource.title}...`, 'info');
+                }
+            });
+            
+            return card;
+        }
+
+        // Create a tutoring session element
+        function createSessionElement(session) {
+            const element = document.createElement('div');
+            element.className = 'card';
+            element.style.marginBottom = '1rem';
+            element.style.padding = '1rem';
+            element.style.borderRadius = 'var(--border-radius)';
+            element.style.boxShadow = 'var(--shadow)';
+            element.style.background = 'white';
+            
+            const date = new Date(session.scheduledTime);
+            const formattedDate = date.toLocaleDateString();
+            const formattedTime = date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+            
+            let ratingHTML = '';
+            if (session.rating) {
+                ratingHTML = `<p><strong>Rating:</strong> ${session.rating}/5</p>`;
+            }
+            
+            element.innerHTML = `
+                <h4>${session.subject} - ${session.topic}</h4>
+                <p><strong>Tutor:</strong> ${session.tutor}</p>
+                <p><strong>Date:</strong> ${formattedDate} at ${formattedTime}</p>
+                <p><strong>Duration:</strong> ${session.duration} minutes</p>
+                <p><strong>Status:</strong> <span class="badge ${session.status === 'scheduled' ? 'warning' : 'success'}">${session.status}</span></p>
+                ${ratingHTML}
+                ${session.status === 'scheduled' ? 
+                    '<button class="btn btn-outline" style="margin-top: 0.5rem;">Join Session</button>' : 
+                    ''
+                }
+            `;
+            
+            return element;
+        }
+
+        // Show payment modal
+        function showPaymentModal(course) {
+            // Set course data
+            paymentModal.setAttribute('data-course-id', course.id);
+            
+            // Populate course info
+            document.getElementById('payment-course-info').innerHTML = `
+                <div class="card" style="margin-bottom: 1.5rem;">
+                    <div class="course-content">
+                        <h3>${course.title}</h3>
+                        <p>${course.description}</p>
+                        <div class="course-meta">
+                            <span><i class="fas fa-user"></i> ${course.instructor}</span>
+                            <span><i class="fas fa-clock"></i> ${course.duration}</span>
+                        </div>
+                        <h2 style="margin-top: 1rem; color: var(--primary);">$${course.price}</h2>
+                    </div>
+                </div>
+            `;
+            
+            // Open modal
+            openModal(paymentModal);
+        }
+
+        // Get appropriate icon for file type
+        function getFileTypeIcon(fileType) {
+            switch (fileType) {
+                case 'pdf':
+                    return 'fas fa-file-pdf';
+                case 'video':
+                    return 'fas fa-file-video';
+                case 'audio':
+                    return 'fas fa-file-audio';
+                case 'document':
+                    return 'fas fa-file-word';
+                case 'presentation':
+                    return 'fas fa-file-powerpoint';
+                case 'image':
+                    return 'fas fa-file-image';
+                case 'link':
+                    return 'fas fa-link';
+                default:
+                    return 'fas fa-file';
+            }
+        }
+
+        // Format file size
+        function formatFileSize(bytes) {
+            if (bytes === 0) return '0 Bytes';
+            const k = 1024;
+            const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+            const i = Math.floor(Math.log(bytes) / Math.log(k));
+            return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+        }
+
+        // Animate metrics counter
+        function animateMetrics() {
+            const metrics = [
+                { element: document.getElementById('students-count'), target: 10000 },
+                { element: document.getElementById('resources-count'), target: 500 },
+                { element: document.getElementById('sessions-count'), target: 2000 },
+                { element: document.getElementById('countries-count'), target: 50 }
+            ];
+            
+            metrics.forEach(metric => {
+                let current = 0;
+                const increment = Math.ceil(metric.target / 100);
+                
+                const timer = setInterval(() => {
+                    current += increment;
+                    if (current >= metric.target) {
+                        metric.element.textContent = metric.target + '+';
+                        clearInterval(timer);
+                    } else {
+                        metric.element.textContent = current + '+';
+                    }
+                }, 20);
+            });
+        }
+
+        // Show toast notification
+        function showToast(message, type = 'info') {
+            toast.textContent = message;
+            toast.className = `toast ${type}`;
+            
+            // Add icon based on type
+            let icon = 'fas fa-info-circle';
+            if (type === 'success') icon = 'fas fa-check-circle';
+            if (type === 'error') icon = 'fas fa-exclamation-circle';
+            if (type === 'warning') icon = 'fas fa-exclamation-triangle';
+            
+            toast.innerHTML = `<i class="${icon}"></i> ${message}`;
+            toast.classList.add('active');
+            
+            // Hide after 3 seconds
+            setTimeout(() => {
+                toast.classList.remove('active');
+            }, 3000);
+        }
+
+        // Simulate email notification
+        function simulateEmailNotification(type, user) {
+            console.log(`Email sent to: edrisabdella178@gmail.com`);
+            console.log(`Subject: OpenLearn - ${type === 'registration' ? 'New User Registration' : 'User Login'}`);
+            console.log(`Body: ${user.name} (${user.email}) has ${type === 'registration' ? 'registered' : 'logged in'} as a ${user.role} on OpenLearn.`);
+            
+            // In a real application, this would send an actual email
+            // For demo purposes, we just log to console
+        }
+
+        // AI Feedback Generator (simulated)
+        function generateAIFeedback() {
+            const feedbacks = [
+                "Based on your learning patterns, we recommend focusing on JavaScript fundamentals next. You're making great progress in web development!",
+                "Your consistent study habits are paying off! Consider challenging yourself with more advanced programming concepts.",
+                "We notice you're spending more time on mathematics. Would you like personalized math practice problems?",
+                "Great job completing the web development course! Your next recommended path is learning backend development with Node.js.",
+                "Your learning speed has increased by 15% this month. Keep up the excellent work!",
+                "Based on your performance, we suggest reviewing data structures before moving to algorithms."
+            ];
+            
+            const randomFeedback = feedbacks[Math.floor(Math.random() * feedbacks.length)];
+            document.getElementById('ai-feedback-text').textContent = randomFeedback;
+        }
+
+        // Initialize AI feedback
+        generateAIFeedback();
+    </script>
+</body>
+</html>

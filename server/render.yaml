@@ -1,0 +1,18 @@
+services:
+  - type: web
+    name: openlearn-backend
+    env: node
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: MONGODB_URI
+        value: mongodb+srv://edrisabdella178_db_user:openlearn@openlearn-app.ptijnyn.mongodb.net/openlearn?retryWrites=true&w=majority
+      - key: Edris123456@OpenLearn
+        generateValue: true
+      - key: Edris123456@OpenLearn
+        value: 30d
+      - key: CLIENT_URL
+        value: https://vercel.com/edris-abdellas-projects/sdg-4-quality-education-project
